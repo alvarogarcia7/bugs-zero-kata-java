@@ -12,26 +12,14 @@ public class Game {
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
 
-	LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
+	private Questions questions;
 
 	public Game(Players players) {
-		for (int i = 0; i < 50; i++) {
-			popQuestions.addLast("Pop Question " + i);
-			scienceQuestions.addLast(("Science Question " + i));
-			sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
-		}
+		questions = new Questions();
 		players.list.stream().forEach(this::add);
-	}
-
-	public String createRockQuestion(int index) {
-		return "Rock Question " + index;
 	}
 
 	public boolean isPlayable() {
@@ -92,14 +80,14 @@ public class Game {
 
 	private void askQuestion() {
 		if (currentCategory() == "Pop") {
-			printQuestion(popQuestions);
+			printQuestion(questions.popQuestions);
 		}
 		if (currentCategory() == "Science")
-			printQuestion(scienceQuestions);
+			printQuestion(questions.scienceQuestions);
 		if (currentCategory() == "Sports")
-			printQuestion(sportsQuestions);
+			printQuestion(questions.sportsQuestions);
 		if (currentCategory() == "Rock")
-			printQuestion(rockQuestions);
+			printQuestion(questions.rockQuestions);
 	}
 
 	private void printQuestion(LinkedList questions) {
@@ -110,16 +98,7 @@ public class Game {
 
 
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
-		return "Rock";
+		return questions.at(places[currentPlayer]);
 	}
 
 	public boolean wasCorrectlyAnswered() {
@@ -178,5 +157,34 @@ public class Game {
 
 	public boolean isFirstPlayerInPenalty() {
 		return inPenaltyBox[0];
+	}
+
+	private class Questions {
+		LinkedList popQuestions = new LinkedList();
+		LinkedList scienceQuestions = new LinkedList();
+		LinkedList sportsQuestions = new LinkedList();
+		LinkedList rockQuestions = new LinkedList();
+
+		public Questions() {
+			for (int i = 0; i < 50; i++) {
+				popQuestions.addLast("Pop Question " + i);
+				scienceQuestions.addLast(("Science Question " + i));
+				sportsQuestions.addLast(("Sports Question " + i));
+				rockQuestions.addLast("Rock Question " + i);
+			}
+		}
+
+		public String at(int place) {
+			if (place == 0) return "Pop";
+			if (place == 4) return "Pop";
+			if (place == 8) return "Pop";
+			if (place == 1) return "Science";
+			if (place == 5) return "Science";
+			if (place == 9) return "Science";
+			if (place == 2) return "Sports";
+			if (place == 6) return "Sports";
+			if (place == 10) return "Sports";
+			return "Rock";
+		}
 	}
 }
