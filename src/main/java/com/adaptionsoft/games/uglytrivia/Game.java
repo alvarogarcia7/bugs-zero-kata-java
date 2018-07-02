@@ -175,15 +175,9 @@ public class Game {
 		}
 
 		public String at(int place) {
-			if (place == 0) return "Pop";
-			if (place == 4) return "Pop";
-			if (place == 8) return "Pop";
-			if (place == 1) return "Science";
-			if (place == 5) return "Science";
-			if (place == 9) return "Science";
-			if (place == 2) return "Sports";
-			if (place == 6) return "Sports";
-			if (place == 10) return "Sports";
+			if (place % 4 == 0) return "Pop";
+			if (place % 4 == 1) return "Science";
+			if (place % 4 == 2) return "Sports";
 			return "Rock";
 		}
 	}
