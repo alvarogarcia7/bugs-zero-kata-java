@@ -1,7 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import com.adaptionsoft.games.trivia.MaximumNumberOfPlayersException;
-import com.adaptionsoft.games.trivia.MinimumNumberOfPlayersException;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -59,9 +58,6 @@ public class Game {
 	}
 
 	public void roll(int roll) {
-		if (players.size() < 2) {
-			throw new MinimumNumberOfPlayersException();
-		}
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
