@@ -41,6 +41,24 @@ public class GameTest {
         // we can't make it green
     }
 
+    @Test
+    public void does_not_run_out_of_questions() {
+        Game game = new Game(Players.aNew("P1", "P2").get());
+
+        for (int i = 0; i < totalNumberOfInitialQuestions() + 1; i++) {
+            consumeOneQuestion(game);
+        }
+    }
+
+    private void consumeOneQuestion(Game game) {
+        game.roll(1);
+        game.wrongAnswer();
+    }
+
+    private int totalNumberOfInitialQuestions() {
+        return 50 * 4;
+    }
+
     private void get_to_penalty_box(Game game) {
         game.wrongAnswer();
     }

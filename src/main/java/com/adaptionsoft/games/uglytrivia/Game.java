@@ -11,8 +11,8 @@ public class Game {
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
-    
-    LinkedList popQuestions = new LinkedList();
+
+	LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
@@ -91,17 +91,24 @@ public class Game {
 	}
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.removeFirst());
+		if (currentCategory() == "Pop") {
+			printQuestion(popQuestions);
+		}
 		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.removeFirst());
+			printQuestion(scienceQuestions);
 		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.removeFirst());
+			printQuestion(sportsQuestions);
 		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+			printQuestion(rockQuestions);
 	}
-	
-	
+
+	private void printQuestion(LinkedList questions) {
+		final Object question = questions.removeFirst();
+		System.out.println(question);
+		questions.addLast(question);
+	}
+
+
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) return "Pop";
 		if (places[currentPlayer] == 4) return "Pop";
