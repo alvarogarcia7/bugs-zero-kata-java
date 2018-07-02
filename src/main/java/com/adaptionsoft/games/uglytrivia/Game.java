@@ -128,7 +128,6 @@ public class Game {
 						+ " Gold Coins.");
 
 				boolean winner = didPlayerWin();
-
 				return winner;
 			} else {
 				currentPlayer++;
@@ -168,5 +167,9 @@ public class Game {
 
 	private boolean didPlayerWin() {
 		return !(purses[currentPlayer] == 6);
+	}
+
+	public boolean isFirstPlayerInPenalty() {
+		return inPenaltyBox[0];
 	}
 }
