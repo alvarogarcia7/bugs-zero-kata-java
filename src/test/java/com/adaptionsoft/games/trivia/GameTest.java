@@ -31,4 +31,12 @@ public class GameTest {
 
         aGame.roll(1);
     }
+
+
+    @Test
+    public void canPlayWithNewGameConstructor() {
+        Game aGame = new Game("Player1", "Player2");
+
+        aGame.roll(1);
+    }
 }

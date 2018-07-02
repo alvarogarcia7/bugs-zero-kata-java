@@ -28,7 +28,13 @@ public class Game {
     	}
     }
 
-	public String createRockQuestion(int index){
+	public Game(String player1, String player2) {
+		this();
+		add(player1);
+		add(player2);
+	}
+
+	public String createRockQuestion(int index) {
 		return "Rock Question " + index;
 	}
 
