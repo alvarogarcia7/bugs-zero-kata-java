@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.trivia.runner.GameRunner;
+import com.adaptionsoft.games.uglytrivia.Game;
 import org.approvaltests.Approvals;
 import org.junit.Test;
 
@@ -22,5 +23,16 @@ public class GameTest {
 
         Approvals.verify(resultStream.toString());
 
+    }
+
+    @Test(expected = MaximumNumberOfPlayersException.class)
+    public void no_more_than_6_players() {
+        Game aGame = new Game("Player1", "Player2");
+
+        aGame.add("p3");
+        aGame.add("p4");
+        aGame.add("p5");
+        aGame.add("p6_INVALID_PLAYER");
+        aGame.roll(1);
     }
 }

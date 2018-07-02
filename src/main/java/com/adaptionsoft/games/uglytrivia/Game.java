@@ -1,5 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.adaptionsoft.games.trivia.MaximumNumberOfPlayersException;
 import com.adaptionsoft.games.trivia.MinimumNumberOfPlayersException;
 
 import java.util.ArrayList;
@@ -39,7 +40,9 @@ public class Game {
 	}
 
 	public boolean add(String playerName) {
-		
+		if (players.size() >= 5) {
+			throw new MaximumNumberOfPlayersException();
+		}
 		
 	    players.add(playerName);
 	    places[howManyPlayers()] = 0;
