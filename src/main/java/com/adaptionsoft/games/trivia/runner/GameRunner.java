@@ -1,8 +1,10 @@
 
 package com.adaptionsoft.games.trivia.runner;
 
+import com.adaptionsoft.games.trivia.Players;
 import com.adaptionsoft.games.uglytrivia.Game;
 
+import java.util.Optional;
 import java.util.Random;
 
 
@@ -13,11 +15,12 @@ public class GameRunner {
 	public static void main(String[] args) {
 		Random rand = new Random();
 		playGame(rand);
-		
+
 	}
 
 	public static void playGame(Random rand) {
-		Game aGame = new Game("Chet", "Pat");
+        final Optional<Players> players = Players.aNew("Chet", "Pat");
+        Game aGame = new Game(players.get());
 		aGame.add("Sue");
 
 

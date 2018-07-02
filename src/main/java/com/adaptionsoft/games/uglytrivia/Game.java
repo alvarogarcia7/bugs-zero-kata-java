@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import com.adaptionsoft.games.trivia.MaximumNumberOfPlayersException;
+import com.adaptionsoft.games.trivia.Players;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,15 +20,14 @@ public class Game {
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 
-	public Game(String player1, String player2) {
+	public Game(Players players) {
 		for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
 			rockQuestions.addLast(createRockQuestion(i));
 		}
-		add(player1);
-		add(player2);
+		players.list.stream().forEach(this::add);
 	}
 
 	public String createRockQuestion(int index) {
