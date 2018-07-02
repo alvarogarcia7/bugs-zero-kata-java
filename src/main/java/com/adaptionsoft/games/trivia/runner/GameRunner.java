@@ -17,10 +17,7 @@ public class GameRunner {
 	}
 
 	public static void playGame(Random rand) {
-		Game aGame = new Game();
-
-		aGame.add("Chet");
-		aGame.add("Pat");
+		Game aGame = new Game("Chet", "Pat");
 		aGame.add("Sue");
 
 

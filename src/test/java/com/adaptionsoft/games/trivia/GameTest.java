@@ -1,7 +1,6 @@
 package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.trivia.runner.GameRunner;
-import com.adaptionsoft.games.uglytrivia.Game;
 import org.approvaltests.Approvals;
 import org.junit.Test;
 
@@ -23,20 +22,5 @@ public class GameTest {
 
         Approvals.verify(resultStream.toString());
 
-    }
-
-    @Test(expected = MinimumNumberOfPlayersException.class)
-    public void a_game_without_players_is_not_valid() {
-        Game aGame = new Game();
-
-        aGame.roll(1);
-    }
-
-
-    @Test
-    public void canPlayWithNewGameConstructor() {
-        Game aGame = new Game("Player1", "Player2");
-
-        aGame.roll(1);
     }
 }
