@@ -7,14 +7,14 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 public class Game {
-    ArrayList players = new ArrayList();
-    int[] places = new int[6];
-    int[] purses  = new int[6];
-    boolean[] inPenaltyBox  = new boolean[6];
+    private ArrayList players = new ArrayList();
+	private int[] places = new int[6];
+	private int[] purses = new int[6];
+	private boolean[] inPenaltyBox = new boolean[6];
 
-    
-    int currentPlayer = 0;
-    boolean isGettingOutOfPenaltyBox;
+
+	private int currentPlayer = 0;
+	private boolean isGettingOutOfPenaltyBox;
 	private Questions questions;
 
 	public Game(Players players) {
