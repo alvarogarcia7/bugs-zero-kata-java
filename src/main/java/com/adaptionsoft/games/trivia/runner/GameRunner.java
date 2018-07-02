@@ -19,10 +19,8 @@ public class GameRunner {
 	}
 
 	public static void playGame(Random rand) {
-        final Optional<Players> players = Players.aNew("Chet", "Pat");
+		final Optional<Players> players = Players.aNew("Chet", "Pat", "Sue");
         Game aGame = new Game(players.get());
-		aGame.add("Sue");
-
 
 		do {
 

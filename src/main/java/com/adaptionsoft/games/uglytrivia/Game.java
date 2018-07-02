@@ -1,6 +1,5 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import com.adaptionsoft.games.trivia.MaximumNumberOfPlayersException;
 import com.adaptionsoft.games.trivia.Players;
 
 import java.util.ArrayList;
@@ -20,24 +19,20 @@ public class Game {
 
 	public Game(Players players) {
 		questions = new Questions();
-		players.list.stream().forEach(this::add);
+		players.list.stream().forEach(this::addPlayer);
 	}
 
 	public boolean isPlayable() {
 		return (howManyPlayers() >= 2);
 	}
 
-	public boolean add(String playerName) {
-		if (players.size() >= 5) {
-			throw new MaximumNumberOfPlayersException();
-		}
-		
-	    players.add(playerName);
+	private boolean addPlayer(String playerName) {
+		players.add(playerName);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
-	    
-	    System.out.println(playerName + " was added");
+
+		System.out.println(playerName + " was added");
 	    System.out.println("They are player number " + players.size());
 		return true;
 	}
