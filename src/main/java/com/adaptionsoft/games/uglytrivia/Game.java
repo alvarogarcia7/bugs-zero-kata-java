@@ -5,6 +5,7 @@ import com.adaptionsoft.games.trivia.Players;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class Game {
     ArrayList players = new ArrayList();
@@ -74,32 +75,15 @@ public class Game {
 		System.out.println(players.get(currentPlayer)
                 + "'s new location is "
                 + places[currentPlayer]);
-		System.out.println("The category is " + currentCategory());
-		askQuestion();
+		Question question = this.questions.pop(places[currentPlayer]);
+		printQuestion(question);
 	}
 
-	private void askQuestion() {
-		if (currentCategory() == "Pop") {
-			printQuestion(questions.popQuestions);
-		}
-		if (currentCategory() == "Science")
-			printQuestion(questions.scienceQuestions);
-		if (currentCategory() == "Sports")
-			printQuestion(questions.sportsQuestions);
-		if (currentCategory() == "Rock")
-			printQuestion(questions.rockQuestions);
+	private void printQuestion(Question question) {
+		System.out.println("The category is " + question.category);
+		System.out.println(question.text);
 	}
 
-	private void printQuestion(LinkedList questions) {
-		final Object question = questions.removeFirst();
-		System.out.println(question);
-		questions.addLast(question);
-	}
-
-
-	private String currentCategory() {
-		return questions.at(places[currentPlayer]);
-	}
 
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
@@ -160,25 +144,37 @@ public class Game {
 	}
 
 	private class Questions {
-		LinkedList popQuestions = new LinkedList();
-		LinkedList scienceQuestions = new LinkedList();
-		LinkedList sportsQuestions = new LinkedList();
-		LinkedList rockQuestions = new LinkedList();
+		Vector<LinkedList<Question>> questions = new Vector<>();
 
-		public Questions() {
-			for (int i = 0; i < 50; i++) {
-				popQuestions.addLast("Pop Question " + i);
-				scienceQuestions.addLast(("Science Question " + i));
-				sportsQuestions.addLast(("Sports Question " + i));
-				rockQuestions.addLast("Rock Question " + i);
-			}
+		public Question pop(int place) {
+			final LinkedList<Question> selectedCategory = this.questions.get(place % questions.size());
+			Question question = selectedCategory.removeFirst();
+			selectedCategory.addLast(question);
+			return question;
 		}
 
-		public String at(int place) {
-			if (place % 4 == 0) return "Pop";
-			if (place % 4 == 1) return "Science";
-			if (place % 4 == 2) return "Sports";
-			return "Rock";
+		public Questions() {
+			questions.add(new LinkedList<>());
+			questions.add(new LinkedList<>());
+			questions.add(new LinkedList<>());
+			questions.add(new LinkedList<>());
+
+			for (int i = 0; i < 50; i++) {
+				questions.get(0).add(new Question("Pop Question " + i, "Pop"));
+				questions.get(1).add(new Question("Science Question " + i, "Science"));
+				questions.get(2).add(new Question("Sports Question " + i, "Sports"));
+				questions.get(3).add(new Question("Rock Question " + i, "Rock"));
+			}
+		}
+	}
+
+	private class Question {
+		private final String text;
+		private final String category;
+
+		public Question(String text, String category) {
+			this.text = text;
+			this.category = category;
 		}
 	}
 }
