@@ -22,10 +22,6 @@ public class Game {
 		players.list.stream().forEach(this::addPlayer);
 	}
 
-	public boolean isPlayable() {
-		return (howManyPlayers() >= 2);
-	}
-
 	private boolean addPlayer(String playerName) {
 		players.add(playerName);
 	    places[howManyPlayers()] = 0;
